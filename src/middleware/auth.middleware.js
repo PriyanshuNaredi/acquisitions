@@ -12,7 +12,9 @@ export const authenticateToken = (req, res, next) => {
       (req.headers.authorization && req.headers.authorization.split(' ')[1]);
 
     if (!token) {
-      return res.status(401).json({ error: 'Unauthorized', message: 'No token provided' });
+      return res
+        .status(401)
+        .json({ error: 'Unauthorized', message: 'No token provided' });
     }
 
     const payload = jwttoken.verify(token);
@@ -20,7 +22,9 @@ export const authenticateToken = (req, res, next) => {
     next();
   } catch (err) {
     logger.warn('Authentication failed', { err: err.message });
-    return res.status(401).json({ error: 'Unauthorized', message: 'Invalid or expired token' });
+    return res
+      .status(401)
+      .json({ error: 'Unauthorized', message: 'Invalid or expired token' });
   }
 };
 
@@ -33,7 +37,9 @@ export const requireRole = (allowedRoles = []) => {
       return res.status(401).json({ error: 'Unauthorized' });
     }
     if (!allowedRoles.includes(req.user.role)) {
-      return res.status(403).json({ error: 'Forbidden', message: 'Insufficient permissions' });
+      return res
+        .status(403)
+        .json({ error: 'Forbidden', message: 'Insufficient permissions' });
     }
     next();
   };

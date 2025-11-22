@@ -5,11 +5,13 @@ This guide explains how to run the application with Docker in both development a
 ## Architecture Overview
 
 ### Development Environment
+
 - **Neon Local**: A Docker proxy that creates ephemeral database branches for development
 - **Application**: Runs in a Docker container and connects to Neon Local
 - **Benefits**: Fresh database branches for each session, no manual cleanup, matches production schema
 
 ### Production Environment
+
 - **Neon Cloud**: Direct connection to your production Neon database
 - **Application**: Runs in a Docker container with production configuration
 - **Benefits**: Serverless Postgres, automatic scaling, point-in-time recovery
@@ -51,6 +53,7 @@ DATABASE_URL=postgres://neon:npg@neon-local:5432/neondb?sslmode=require
 ```
 
 **Where to find these values:**
+
 - **NEON_API_KEY**: Console → Account Settings → API Keys
 - **NEON_PROJECT_ID**: Console → Project Settings → General
 - **PARENT_BRANCH_ID**: Console → Branches (copy the ID of your main branch)
@@ -270,15 +273,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      
+
       - name: Build Docker image
         run: docker build -t acquisitions-app:${{ github.sha }} .
-      
+
       - name: Push to registry
         run: |
           docker tag acquisitions-app:${{ github.sha }} your-registry/acquisitions-app:latest
           docker push your-registry/acquisitions-app:latest
-      
+
       - name: Deploy
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
@@ -363,6 +366,7 @@ acquisitions/
 ## Support
 
 For issues related to:
+
 - **Neon**: https://neon.tech/docs/introduction/support
 - **Docker**: https://docs.docker.com/get-support/
 - **This App**: Create an issue in the GitHub repository

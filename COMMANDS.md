@@ -4,43 +4,44 @@
 
 ### Development Commands
 
-| Command | Description |
-|---------|-------------|
-| `make dev-up` | Start development environment |
-| `make dev-up-d` | Start in background (detached) |
-| `make dev-down` | Stop development environment |
-| `make dev-logs` | View real-time logs |
-| `make dev-shell` | Open shell in app container |
-| `make dev-migrate` | Run database migrations |
-| `make dev-restart` | Restart containers |
+| Command            | Description                    |
+| ------------------ | ------------------------------ |
+| `make dev-up`      | Start development environment  |
+| `make dev-up-d`    | Start in background (detached) |
+| `make dev-down`    | Stop development environment   |
+| `make dev-logs`    | View real-time logs            |
+| `make dev-shell`   | Open shell in app container    |
+| `make dev-migrate` | Run database migrations        |
+| `make dev-restart` | Restart containers             |
 
 ### Production Commands
 
-| Command | Description |
-|---------|-------------|
-| `make prod-up` | Start production environment |
-| `make prod-up-d` | Start in background (detached) |
-| `make prod-down` | Stop production environment |
-| `make prod-logs` | View real-time logs |
-| `make prod-shell` | Open shell in app container |
-| `make prod-migrate` | Run database migrations |
-| `make prod-restart` | Restart containers |
+| Command             | Description                    |
+| ------------------- | ------------------------------ |
+| `make prod-up`      | Start production environment   |
+| `make prod-up-d`    | Start in background (detached) |
+| `make prod-down`    | Stop production environment    |
+| `make prod-logs`    | View real-time logs            |
+| `make prod-shell`   | Open shell in app container    |
+| `make prod-migrate` | Run database migrations        |
+| `make prod-restart` | Restart containers             |
 
 ### Utility Commands
 
-| Command | Description |
-|---------|-------------|
-| `make help` | Show all available commands |
-| `make check` | Validate Docker setup |
-| `make build` | Build Docker image |
+| Command      | Description                   |
+| ------------ | ----------------------------- |
+| `make help`  | Show all available commands   |
+| `make check` | Validate Docker setup         |
+| `make build` | Build Docker image            |
 | `make clean` | Remove all containers/volumes |
-| `make ps` | Show running containers |
+| `make ps`    | Show running containers       |
 
 ## 📋 Without Make
 
 If you don't have Make installed (or prefer Docker commands):
 
 ### Development
+
 ```bash
 # Start
 docker-compose -f docker-compose.dev.yml up
@@ -62,6 +63,7 @@ docker-compose -f docker-compose.dev.yml exec app sh
 ```
 
 ### Production
+
 ```bash
 # Start
 docker-compose -f docker-compose.prod.yml up -d
@@ -141,6 +143,7 @@ docker-compose -f docker-compose.dev.yml build app
 ## 🎯 Most Common Workflows
 
 ### Start Fresh Development Session
+
 ```bash
 make dev-up
 # Wait for containers to start
@@ -149,6 +152,7 @@ make dev-migrate
 ```
 
 ### Debug Development Issues
+
 ```bash
 make dev-logs        # Check logs
 make dev-shell       # Open shell in container
@@ -158,6 +162,7 @@ make dev-up          # Start again
 ```
 
 ### Deploy to Production
+
 ```bash
 # Build image
 docker build -t acquisitions-app:latest .
@@ -177,6 +182,7 @@ docker push your-registry/acquisitions-app:latest
 ## 🔐 Environment Setup Checklist
 
 ### Before Development
+
 - [ ] Copy `.env.development` to `.env.development.local` (optional)
 - [ ] Add `NEON_API_KEY` in `.env.development`
 - [ ] Add `NEON_PROJECT_ID` in `.env.development`
@@ -184,6 +190,7 @@ docker push your-registry/acquisitions-app:latest
 - [ ] Run `make dev-up`
 
 ### Before Production
+
 - [ ] Get production DATABASE_URL from Neon Console
 - [ ] Create `.env.production` (DON'T commit!)
 - [ ] Add `DATABASE_URL` in `.env.production`
@@ -200,11 +207,11 @@ docker push your-registry/acquisitions-app:latest
 
 ## 🆘 Troubleshooting Quick Fixes
 
-| Problem | Solution |
-|---------|----------|
-| Port already in use | `docker ps` and stop conflicting container |
-| Neon Local won't start | Check API key in `.env.development` |
-| Database connection fails | Verify `DATABASE_URL` format includes `?sslmode=require` |
-| Changes not reflected | Rebuild: `make build-dev` |
-| Container exits immediately | Check logs: `make dev-logs` |
-| Out of disk space | Clean up: `make prune` |
+| Problem                     | Solution                                                 |
+| --------------------------- | -------------------------------------------------------- |
+| Port already in use         | `docker ps` and stop conflicting container               |
+| Neon Local won't start      | Check API key in `.env.development`                      |
+| Database connection fails   | Verify `DATABASE_URL` format includes `?sslmode=require` |
+| Changes not reflected       | Rebuild: `make build-dev`                                |
+| Container exits immediately | Check logs: `make dev-logs`                              |
+| Out of disk space           | Clean up: `make prune`                                   |

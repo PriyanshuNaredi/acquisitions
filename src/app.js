@@ -15,8 +15,12 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
-app.use(morgan('combined', { stream: { write: message => logger.info(message.trim()) } }));
-app.use(securityMiddleware)
+app.use(
+  morgan('combined', {
+    stream: { write: message => logger.info(message.trim()) },
+  })
+);
+app.use(securityMiddleware);
 
 app.get('/', (req, res) => {
   logger.info('Hello from "/" route');
@@ -24,18 +28,23 @@ app.get('/', (req, res) => {
 });
 
 app.get('/health', (req, res) => {
-  res.status(200).json({ status: 'OK', timestamp: new Date().toISOString(), upTime: process.uptime() });
+  res
+    .status(200)
+    .json({
+      status: 'OK',
+      timestamp: new Date().toISOString(),
+      upTime: process.uptime(),
+    });
 });
 
 app.get('/api', (req, res) => {
   res.status(200).json({ message: 'Welcome to the Acquisitions API' });
 });
 
-
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
 
-app.use((req,res) => {
+app.use((req, res) => {
   res.status(404).json({ error: 'ROUTE Not Found' });
 });
 

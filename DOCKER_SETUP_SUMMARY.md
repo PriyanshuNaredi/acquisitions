@@ -3,22 +3,26 @@
 ## 📦 Files Created
 
 ### Docker Configuration
+
 - ✅ `Dockerfile` - Multi-stage build for Node.js app (development & production)
 - ✅ `docker-compose.dev.yml` - Development setup with Neon Local
 - ✅ `docker-compose.prod.yml` - Production setup with Neon Cloud
 - ✅ `.dockerignore` - Excludes unnecessary files from Docker image
 
 ### Environment Configuration
+
 - ✅ `.env.development` - Development environment template
 - ✅ `.env.production` - Production environment template
 - ✅ Updated `.gitignore` - Excludes sensitive env files and Neon Local metadata
 
 ### Documentation
+
 - ✅ `DOCKER_README.md` - Comprehensive setup guide
 - ✅ `QUICKSTART.md` - Quick start guide for developers
 - ✅ `DOCKER_SETUP_SUMMARY.md` - This file
 
 ### Utilities
+
 - ✅ `Makefile` - Convenient commands for Docker operations
 - ✅ `scripts/check-setup.sh` - Setup validation script
 - ✅ Updated `package.json` - Added `start` script for production
@@ -26,6 +30,7 @@
 ## 🏗️ Architecture
 
 ### Development Environment
+
 ```
 ┌─────────────────────────────────────┐
 │    Your Application (Docker)        │
@@ -48,6 +53,7 @@
 ```
 
 ### Production Environment
+
 ```
 ┌─────────────────────────────────────┐
 │    Your Application (Docker)        │
@@ -65,6 +71,7 @@
 ## 🚀 Quick Start Commands
 
 ### Using Make (Recommended)
+
 ```bash
 # Development
 make dev-up          # Start dev environment
@@ -85,6 +92,7 @@ make clean           # Clean up everything
 ```
 
 ### Using Docker Compose Directly
+
 ```bash
 # Development
 docker-compose -f docker-compose.dev.yml up
@@ -98,6 +106,7 @@ docker-compose -f docker-compose.prod.yml down
 ## 🔑 Environment Variables
 
 ### Development (.env.development)
+
 ```env
 NEON_API_KEY=<your_api_key>
 NEON_PROJECT_ID=<your_project_id>
@@ -106,6 +115,7 @@ DATABASE_URL=postgres://neon:npg@neon-local:5432/neondb?sslmode=require
 ```
 
 ### Production (.env.production)
+
 ```env
 DATABASE_URL=postgres://user:pass@ep-xxx.neon.tech/dbname?sslmode=require
 NODE_ENV=production
@@ -121,6 +131,7 @@ The setup automatically switches between dev and prod based on which compose fil
 ## 📝 Key Features
 
 ### Development
+
 - ✅ Neon Local proxy for local database development
 - ✅ Ephemeral branches (created on start, deleted on stop)
 - ✅ Hot reload support with volume mounts
@@ -129,6 +140,7 @@ The setup automatically switches between dev and prod based on which compose fil
 - ✅ Git-branch-aware persistent branches (optional)
 
 ### Production
+
 - ✅ Direct connection to Neon Cloud
 - ✅ Optimized Docker image (multi-stage build)
 - ✅ Resource limits for production
@@ -158,6 +170,7 @@ The setup automatically switches between dev and prod based on which compose fil
    - (Optional) Get branch ID from Branches tab
 
 2. **Start development**:
+
    ```bash
    make dev-up
    # or
@@ -165,6 +178,7 @@ The setup automatically switches between dev and prod based on which compose fil
    ```
 
 3. **Run migrations**:
+
    ```bash
    make dev-migrate
    ```
@@ -176,18 +190,22 @@ The setup automatically switches between dev and prod based on which compose fil
 ### Common Issues
 
 **Port 5432 already in use**
+
 - Stop local PostgreSQL or change port in `docker-compose.dev.yml`
 
 **Neon Local won't start**
+
 - Check API key and project ID are correct
 - Check Docker logs: `make dev-logs`
 
 **Database connection failed**
+
 - Verify DATABASE_URL format
 - Check Neon project isn't suspended
 - Ensure SSL mode is set: `?sslmode=require`
 
 **Hot reload not working**
+
 - Volume mounts configured in `docker-compose.dev.yml`
 - Rebuild image: `make build-dev`
 

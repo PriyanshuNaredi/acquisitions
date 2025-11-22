@@ -1,4 +1,9 @@
-import { fetchAllUsers, fetchUserById, updateUserById, deleteUserById } from '#controllers/users.controllers.js';
+import {
+  fetchAllUsers,
+  fetchUserById,
+  updateUserById,
+  deleteUserById,
+} from '#controllers/users.controllers.js';
 import { authenticateToken, requireRole } from '#middleware/auth.middleware.js';
 import express from 'express';
 
@@ -14,6 +19,11 @@ router.get('/:id', authenticateToken, fetchUserById);
 router.put('/:id', authenticateToken, updateUserById);
 
 // Delete user - admin only
-router.delete('/:id', authenticateToken, requireRole(['admin']), deleteUserById);
+router.delete(
+  '/:id',
+  authenticateToken,
+  requireRole(['admin']),
+  deleteUserById
+);
 
 export default router;

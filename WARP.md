@@ -2,7 +2,7 @@
 
 This file provides guidance to WARP (warp.dev) when working with code in this repository.
 
-## Commands overview
+## Commands Overview
 
 ### Local Node (without Docker)
 
